@@ -35,9 +35,14 @@ export const MainNavigation = ({ screen, params }: PropsMain) => {
         }}
       />
 
-      <Stack.Screen name="TransferScreen" component={Transfer} />
-      {/* <Stack.Screen name="BalanceScreen" component={Balance} /> */}
-
+      {/* <Stack.Screen name="TransferScreen" component={Transfer} /> */}
+      <Stack.Screen
+        name="TransferScreen"
+        component={Transfer}
+        options={{
+          header: () => <LogoHeader showGoBack />,
+        }}
+      />
       <Stack.Screen
         name="BalanceScreen"
         component={Balance}
