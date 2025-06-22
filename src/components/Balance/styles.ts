@@ -9,16 +9,7 @@ export const Space = styled.View<SpaceProp>`
 `;
 
 export const Container = styled.View`
-  flex: 1;
-  padding: 24px;
-  background-color: white;
   align-items: center;
-`;
-
-export const Header = styled.View`
-  width: 100%;
-  align-items: center;
-  background-color: white;
 `;
 
 export const Title = styled.Text`
