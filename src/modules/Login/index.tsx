@@ -72,10 +72,10 @@ import React, { useState } from "react";
 import { Title, FormWrapper, Space } from "./styles";
 import Input from "../../components/CustomInput";
 import { CustomButton } from "../../components/CustomButton";
-import { ScreenContainer } from "../../components/ScreemComponent";
 import { RootStackParamList } from "../routes";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { ScreenContainer } from "../../components/ScreemComponent";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -85,7 +85,7 @@ export default function Login() {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const goToRegister = () => {
-    navigation.navigate("BalanceScreen");
+    navigation.navigate("TransferScreen");
   };
 
   return (
