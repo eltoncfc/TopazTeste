@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Title, Label, Input, Button, ButtonText, DateInput } from "./styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Platform } from "react-native";
+import { CustomButton } from "../CustomButton";
 
 type TransferFormProps = {
   onSchedule: (amount: string, recipient: string, scheduledDate: Date) => void;
@@ -33,7 +34,7 @@ export const TransferForm = ({ onSchedule }: TransferFormProps) => {
       <Label>CPF</Label>
       <Input
         value={recipient}
-        onChangeText={(text) => setRecipient(formatCPF(text))}
+        onChangeText={(text: string) => setRecipient(formatCPF(text))}
         placeholder="CPF"
         keyboardType="numeric"
       />
@@ -63,9 +64,14 @@ export const TransferForm = ({ onSchedule }: TransferFormProps) => {
         />
       )}
 
-      <Button onPress={handleSchedule}>
-        <ButtonText>Schedule Transfer</ButtonText>
-      </Button>
+      <CustomButton
+        title="Agendamento"
+        onPress={() => handleSchedule()}
+        backgroundColor="#28a745"
+        borderColor="#218838"
+        borderRadius={12}
+        textColor="#fff"
+      />
     </>
   );
 };
