@@ -6,9 +6,12 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "clear": "expo start -c"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "~1.22.0",
+    "@react-native-community/datetimepicker": "8.3.0",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
     "expo": "~53.0.12",
@@ -20,8 +23,7 @@
     "react-native-reanimated": "^3.18.0",
     "react-native-safe-area-context": "^5.5.0",
     "react-native-screens": "^4.11.1",
-    "styled-components": "^6.1.19",
-    "@react-native-community/datetimepicker": "8.3.0"
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
