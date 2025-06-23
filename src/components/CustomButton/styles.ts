@@ -21,6 +21,6 @@ type ButtonTextProps = {
 
 export const ButtonText = styled.Text<ButtonTextProps>`
   color: ${({ textColor }) => textColor};
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
 `;

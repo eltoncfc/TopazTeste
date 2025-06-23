@@ -1,12 +1,10 @@
-// src/components/ScreenContainer/index.tsx
-
 import React, { ReactNode } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import { Container, Content } from "./styles";
 import { LogoHeader } from "../LogoHeader";
 
 type ScreenContainerProps = {
-  children: ReactNode;
+  children?: ReactNode;
   showGoBack?: boolean;
 };
 
