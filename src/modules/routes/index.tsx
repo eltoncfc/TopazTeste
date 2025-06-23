@@ -35,7 +35,6 @@ export const MainNavigation = ({ screen, params }: PropsMain) => {
         }}
       />
 
-      {/* <Stack.Screen name="TransferScreen" component={Transfer} /> */}
       <Stack.Screen
         name="TransferScreen"
         component={Transfer}

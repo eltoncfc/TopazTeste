@@ -1,5 +1,13 @@
 import styled from "styled-components/native";
 
+type SpaceProp = {
+  value: number;
+};
+
+export const Space = styled.View<SpaceProp>`
+  margin-top: ${(props) => props.value ?? 0}px;
+`;
+
 export const Header = styled.View`
   width: 100%;
   align-items: center;
