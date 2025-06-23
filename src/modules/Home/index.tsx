@@ -18,6 +18,9 @@ import { ptBR } from "date-fns/locale";
 import EyeClosedIcon from "../../assets/eye-closed.svg";
 import EyeOpenIcon from "../../assets/eye-open.svg";
 import { CustomButton } from "../../components/CustomButton";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../routes";
 
 export const Home = () => {
   const [userName, setUserName] = useState("Usuário");
@@ -25,8 +28,21 @@ export const Home = () => {
   const [showBalance, setShowBalance] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
 
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const goToSchedule = () => {
+    navigation.navigate("Home");
+  };
+  const goToTransfer = () => {
+    navigation.navigate("TransferScreen");
+  };
+  const goToListTransfer = () => {
+    navigation.navigate("Home");
+  };
+
   useEffect(() => {
-    setUserName("Gabriel");
+    setUserName("Gabrieeel");
     setBalance("R$ 3.520,45");
 
     const now = new Date();
@@ -58,6 +74,15 @@ export const Home = () => {
           </EyeButton>
         </BalanceSection>
         <Space value={68} />
+        <CustomButton
+          title="Transferência"
+          onPress={() => goToTransfer()}
+          backgroundColor="#28a745"
+          borderColor="#218838"
+          borderRadius={12}
+          textColor="#fff"
+        />
+        <Space value={48} />
 
         <CustomButton
           title="Agendar "
@@ -67,16 +92,18 @@ export const Home = () => {
           borderRadius={12}
           textColor="#fff"
         />
+
         <Space value={48} />
 
         <CustomButton
-          title="Transferência"
+          title="Lista de transferência"
           onPress={() => []}
           backgroundColor="#28a745"
           borderColor="#218838"
           borderRadius={12}
           textColor="#fff"
         />
+
         <Space value={48} />
 
         <CustomButton
