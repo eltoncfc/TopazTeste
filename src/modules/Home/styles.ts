@@ -5,32 +5,54 @@ type SpaceProp = {
 };
 
 export const Space = styled.View<SpaceProp>`
-  margin-top: ${(props) => props.value ?? 0}px;
+  margin-top: ${(props: { value: any }) => props.value ?? 0}px;
 `;
 
-export const Container = styled.View`
-  flex: 1;
-  padding: 24px;
-  background-color: white;
-  align-items: center;
-`;
-
-export const Header = styled.View`
+export const ContentContainer = styled.View`
   width: 100%;
-  align-items: center;
-  background-color: white;
+  padding: 24px;
 `;
 
-export const Title = styled.Text`
+export const GreetingText = styled.Text`
   font-size: 20px;
   font-weight: bold;
-  margin-top: 24px;
   color: #333;
 `;
 
-export const BalanceAmount = styled.Text`
-  font-size: 32px;
+export const HeaderRow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const DateText = styled.Text`
+  font-size: 16px;
+  color: #666;
+`;
+
+export const BalanceSection = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+`;
+
+export const BalanceLabel = styled.Text`
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+`;
+
+export const BalanceValue = styled.Text`
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 8px;
-  color: #2e7d32;
+  color: #333;
+  flex: 1;
+  text-align: center;
+`;
+
+export const EyeButton = styled.TouchableOpacity`
+  width: 32px;
+  align-items: center;
+  justify-content: center;
 `;
