@@ -16,8 +16,8 @@ export default function Login() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const goTo = () => {
-    navigation.navigate("TransferScreen");
+  const goToHome = () => {
+    navigation.navigate("Home");
   };
 
   const handleLogin = async () => {
@@ -26,7 +26,7 @@ export default function Login() {
 
       console.log("Login ok:", res);
 
-      navigation.navigate("TransferScreen");
+      goToHome();
     } catch (err: any) {
       console.warn("Falha no login:", err.message);
     }
