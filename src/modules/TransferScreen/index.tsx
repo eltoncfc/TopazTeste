@@ -23,25 +23,24 @@ export const TransferScreen = () => {
 
   const handleTransfer = async () => {
     if (!token) {
-      setError("Você precisa estar logado para transfeir.");
+      setError("Você precisa estar logado para transferir.");
       return;
     }
 
     setError(null);
     setLoading(true);
-
     const payload = {
       value: parseFloat(amount),
       currency: "BRL",
       payeerDocument: recipient.replace(/\D/g, ""),
       transferDate: new Date().toISOString().split("T")[0],
     };
-
     try {
       const response = await transferAmount(payload, token);
+      goToSuccess();
     } catch (error) {
       console.error("Erro ao transferir:", error);
-      setError("Erro ao realizar transferência. Tente novamee.");
+      setError("Erro ao realizar transferência. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -49,7 +48,7 @@ export const TransferScreen = () => {
 
   const handleListTransfers = async () => {
     if (!token) {
-      console.log("🚫 Token ausente. Não é possível buscar transferências.");
+      console.log("Token ausente. Não é possível buscar transferências.");
       return;
     }
 
@@ -58,6 +57,10 @@ export const TransferScreen = () => {
     } catch (err: any) {
       console.error("Erro ao buscar transferências", err.message);
     }
+  };
+
+  const goToSuccess = () => {
+    navigation.navigate("UserSuccess");
   };
 
   return (
