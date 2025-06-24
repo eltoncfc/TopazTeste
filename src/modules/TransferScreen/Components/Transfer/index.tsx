@@ -4,6 +4,7 @@ import { Title, Label, Input, Space } from "./styles";
 type Props = {
   amount: string;
   recipient: string;
+  title: string;
   onChangeAmount: (value: string) => void;
   onChangeRecipient: (value: string) => void;
 };
@@ -13,6 +14,7 @@ export const Transfer = ({
   recipient,
   onChangeAmount,
   onChangeRecipient,
+  title,
 }: Props) => {
   const formatCPF = (value: string) => {
     const numeric = value.replace(/\D/g, "").slice(0, 11);
@@ -24,7 +26,7 @@ export const Transfer = ({
 
   return (
     <>
-      <Title>Nova transferência</Title>
+      <Title>{title}</Title>
 
       <Label>CPF</Label>
       <Input
