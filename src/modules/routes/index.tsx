@@ -2,16 +2,18 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Login from "../Login";
-import { Transfer } from "../TransferScreen";
 import { Balance } from "../BalanceScreen";
 import { LogoHeader } from "../../components/LogoHeader";
 import { Home } from "../Home";
+import { UserSuccess } from "../UserSuccess";
+import { TransferScreen } from "../TransferScreen";
 
 export type RootStackParamList = {
   Login: undefined;
   TransferScreen: undefined;
   BalanceScreen: undefined;
   Home: undefined;
+  UserSuccess: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -47,7 +49,7 @@ export const MainNavigation = ({ screen, params }: PropsMain) => {
 
       <Stack.Screen
         name="TransferScreen"
-        component={Transfer}
+        component={TransferScreen}
         options={{
           header: () => <LogoHeader showGoBack />,
         }}
@@ -57,6 +59,14 @@ export const MainNavigation = ({ screen, params }: PropsMain) => {
         component={Balance}
         options={{
           header: () => <LogoHeader showGoBack />,
+        }}
+      />
+
+      <Stack.Screen
+        name="UserSuccess"
+        component={UserSuccess}
+        options={{
+          header: () => <LogoHeader />,
         }}
       />
     </Stack.Navigator>
