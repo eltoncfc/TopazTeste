@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { ScreenContainer } from "../../components/ScreemComponent";
 import { CustomButton } from "../../components/CustomButton";
 import { Space } from "./styles";
-import { logout } from "../../utils/storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../routes";
-import { Transfer } from "./Components/Transfer";
-import { transferAmount, getTransferList } from "./service";
+import { ScheduleCalendar } from "../../components/Schedule";
+import { Transfer } from "../TransferScreen/Components/Transfer";
+import { useCalendar } from "../../hooks/useCalendar";
+
+import { transferAmount } from "../TransferScreen/service";
 import { useAppSelector } from "../../store/store";
 
-export const TransferScreen = () => {
+export const Scheduling = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -19,65 +21,86 @@ export const TransferScreen = () => {
   const [amount, setAmount] = useState("");
   const [recipient, setRecipient] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const handleTransfer = async () => {
+  const { CalendarTrigger, openCalendar } = useCalendar(
+    selectedDate,
+    (date) => {
+      setSelectedDate(date);
+    }
+  );
+
+  const goToHome = () => {
+    navigation.navigate("Home");
+  };
+
+  const handleSchedule = async () => {
     if (!token) {
-      setError("Você precisa estar logado para transferir.");
+      alert("Você precisa estar logado.");
       return;
     }
 
-    setError(null);
+    if (!amount || !recipient) {
+      alert("Preencha todos os campos.");
+      return;
+    }
+
     setLoading(true);
+
     const payload = {
       value: parseFloat(amount),
       currency: "BRL",
       payeerDocument: recipient.replace(/\D/g, ""),
-      transferDate: new Date().toISOString().split("T")[0],
+      transferDate: selectedDate.toISOString().split("T")[0],
     };
+
     try {
       const response = await transferAmount(payload, token);
-      goToSuccess();
-    } catch (error) {
-      console.error("Erro ao transferir:", error);
-      setError("Erro ao realizar transferência. Tente novamente.");
+
+      if (response?.status === "success") {
+        alert("Transferência agendada com sucesso!");
+        navigation.navigate("UserSuccess");
+      } else {
+        alert("Erro ao agendar. Verifique os dados.");
+      }
+    } catch (err) {
+      console.error(" Erro ao agendar:", err);
+      alert("Erro ao agendar.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleListTransfers = async () => {
-    if (!token) {
-      console.log("Token ausente. Não é possível buscar transferências.");
-      return;
-    }
-
-    try {
-      const transfers = await getTransferList(token);
-    } catch (err: any) {
-      console.error("Erro ao buscar transferências", err.message);
-    }
-  };
-
-  const goToSuccess = () => {
-    navigation.navigate("UserSuccess");
-  };
-
   return (
-    <ScreenContainer showGoBack>
-      <Space value={28} />
+    <ScreenContainer>
+      <Space value={64} />
+
       <Transfer
-        title={"oq??"}
+        title={"Agendamento"}
         amount={amount}
         recipient={recipient}
         onChangeAmount={setAmount}
         onChangeRecipient={setRecipient}
       />
-      <Space value={38} />
+
+      <Space value={32} />
 
       <CustomButton
-        title="Efetuar transferência"
-        onPress={handleTransfer}
+        title="Abrir calendário"
+        onPress={openCalendar}
+        backgroundColor="#28a745"
+        borderColor="#218838"
+        borderRadius={12}
+        textColor="#fff"
+      />
+
+      <CalendarTrigger />
+
+      <Space value={32} />
+
+      <CustomButton
+        title={loading ? "Agendando..." : "Agendar transferência"}
+        onPress={handleSchedule}
         backgroundColor="#28a745"
         borderColor="#218838"
         borderRadius={12}
@@ -86,19 +109,10 @@ export const TransferScreen = () => {
       />
 
       <Space value={18} />
-      <CustomButton
-        title="Listar Transferências"
-        onPress={handleListTransfers}
-        backgroundColor="#007bff"
-        borderColor="#0056b3"
-        borderRadius={12}
-        textColor="#fff"
-      />
 
-      <Space value={18} />
       <CustomButton
-        title="Sair"
-        onPress={() => logout(navigation)}
+        title="Voltar para Home"
+        onPress={goToHome}
         backgroundColor="#28a745"
         borderColor="#218838"
         borderRadius={12}

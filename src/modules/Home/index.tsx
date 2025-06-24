@@ -32,7 +32,7 @@ export const Home = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const goToSchedule = () => {
-    navigation.navigate("Home");
+    navigation.navigate("Scheduling");
   };
   const goToTransfer = () => {
     navigation.navigate("TransferScreen");
@@ -86,7 +86,7 @@ export const Home = () => {
 
         <CustomButton
           title="Agendar "
-          onPress={() => []}
+          onPress={() => goToSchedule()}
           backgroundColor="#28a745"
           borderColor="#218838"
           borderRadius={12}
