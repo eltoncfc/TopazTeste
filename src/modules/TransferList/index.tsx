@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { ScreenContainer } from "../../components/ScreemComponent";
 import { CustomButton } from "../../components/CustomButton";
-import { Space } from "./styles";
+import { Space, Title } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../routes";
 import { getTransfers, TransferItem } from "./service";
 import { GenericList } from "../../components/List";
-import { ItemContainer, ItemText } from "../../components/List/styles";
+import { ItemContainer, ItemText, Row } from "../../components/List/styles";
 import { useAppSelector } from "../../store/store";
+
+import PersonIcon from "../../assets/person-icon.svg";
+import MoneyIcon from "../../assets/money-icon.svg";
+import CalendarIcon from "../../assets/calendar-icon.svg";
 
 export const TransferList = () => {
   const navigation =
@@ -22,6 +26,7 @@ export const TransferList = () => {
       fetchTransfers(token);
     }
   }, [token]);
+
   const fetchTransfers = async (token: string) => {
     try {
       console.log("Token usado na requisição:", token);
@@ -31,6 +36,7 @@ export const TransferList = () => {
       console.error("Erro ao buscar transferências:", err);
     }
   };
+
   const goToHome = () => {
     navigation.navigate("Home");
   };
@@ -40,14 +46,26 @@ export const TransferList = () => {
       <Space value={32} />
 
       <GenericList
+        title="Transferências Recentes"
         data={data}
         renderItem={(item) => (
           <ItemContainer>
-            <ItemText>{item.payeer.name}</ItemText>
-            <ItemText>
-              {item.value.toFixed(2)} {item.currency}
-            </ItemText>
-            <ItemText>{item.date}</ItemText>
+            <Row>
+              <PersonIcon width={20} height={20} />
+              <ItemText>{item.payeer.name}</ItemText>
+            </Row>
+
+            <Row>
+              <MoneyIcon width={20} height={20} />
+              <ItemText>
+                {item.value.toFixed(2)} {item.currency}
+              </ItemText>
+            </Row>
+
+            <Row>
+              <CalendarIcon width={20} height={20} />
+              <ItemText>{item.date}</ItemText>
+            </Row>
           </ItemContainer>
         )}
         keyExtractor={(item, index) => `${item.payeer.document}-${index}`}

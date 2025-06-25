@@ -14,15 +14,6 @@ export const Header = styled.View`
   background-color: white;
 `;
 
-export const Title = styled.Text`
-  font-size: 22px;
-  font-weight: bold;
-  margin-top: 16px;
-  margin-bottom: 24px;
-  text-align: center;
-  color: #333;
-`;
-
 export const Label = styled.Text`
   font-size: 16px;
   margin-bottom: 4px;
@@ -56,4 +47,10 @@ export const ButtonText = styled.Text`
   color: #fff;
   font-weight: bold;
   font-size: 16px;
+`;
+export const Title = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 24px;
 `;
