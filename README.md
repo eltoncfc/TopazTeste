@@ -1,11 +1,18 @@
 # Topazapp
 
+--- Observação inicial ---
+Teste realizados nos modulos Home e Login. Ambos estão com Warn.
+Peço desculpas por isso. 
+
+---
+
 Aplicativo bancário desenvolvido com React Native e Expo. Permite consulta de saldo, realização e agendamento de transferências bancárias, além de exibir o histórico de transferências.
 
 ---
 
 ## Tecnologias Utilizadas
 
+- Node v22.16.0
 - React Native (v0.79.4) + Expo (SDK 53)
 - Redux Toolkit para gerenciamento de estado
 - TypeScript para tipagem estática
@@ -15,6 +22,8 @@ Aplicativo bancário desenvolvido com React Native e Expo. Permite consulta de s
 - Jest + React Testing Library para testes
 
 ---
+
+
 
 ## Como Rodar o Projeto Localmente
 
