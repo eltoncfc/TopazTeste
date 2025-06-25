@@ -19,6 +19,7 @@ export const Title = styled.Text`
 
 export const Label = styled.Text`
   font-size: 16px;
+  font-weight: bold;
   margin-bottom: 4px;
   color: #444;
 `;

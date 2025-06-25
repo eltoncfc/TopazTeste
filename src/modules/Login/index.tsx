@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -30,14 +31,12 @@ export default function Login() {
     try {
       const res = await login(email, password);
 
-      console.log("Login ok:", res);
-
       dispatch(setToken(res.token));
       dispatch(setUserName(res.user.name));
 
       goToHome();
     } catch (err: any) {
-      console.warn("Falha no login:", err.message);
+      Alert.alert("Erro ao entrar", "E-mail ou senha incorretos.");
     }
   };
 
@@ -63,6 +62,7 @@ export default function Login() {
           onChangeText={setPassword}
         />
       </FormWrapper>
+
       <Space value={48} />
 
       <CustomButton

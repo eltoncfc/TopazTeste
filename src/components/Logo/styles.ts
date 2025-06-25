@@ -14,4 +14,5 @@ export const HeaderImage = styled.Image`
   width: ${width * 0.6}px;
   height: ${width * 0.4}px;
   margin-bottom: 16px;
+  margin-right: 22px;
 `;

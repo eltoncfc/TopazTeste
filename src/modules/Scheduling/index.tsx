@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { ScreenContainer } from "../../components/ScreemComponent";
 import { CustomButton } from "../../components/CustomButton";
-import { Space } from "./styles";
+import { DateText, Space } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../routes";
-import { ScheduleCalendar } from "../../components/Schedule";
 import { Transfer } from "../TransferScreen/Components/Transfer";
 import { useCalendar } from "../../hooks/useCalendar";
+import { format } from "date-fns";
 
 import { transferAmount } from "../TransferScreen/service";
 import { useAppSelector } from "../../store/store";
+import Input from "../../components/CustomInput";
 
 export const Scheduling = () => {
   const navigation =
@@ -22,11 +23,13 @@ export const Scheduling = () => {
   const [recipient, setRecipient] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [formattedDate, setFormattedDate] = useState("");
 
   const { CalendarTrigger, openCalendar } = useCalendar(
     selectedDate,
     (date) => {
       setSelectedDate(date);
+      setFormattedDate(format(date, "dd/MM/yyyy"));
     }
   );
 
@@ -58,7 +61,6 @@ export const Scheduling = () => {
       const response = await transferAmount(payload, token);
 
       if (response?.status === "success") {
-        alert("Transferência agendada com sucesso!");
         navigation.navigate("UserSuccess");
       } else {
         alert("Erro ao agendar. Verifique os dados.");
@@ -82,6 +84,8 @@ export const Scheduling = () => {
         onChangeAmount={setAmount}
         onChangeRecipient={setRecipient}
       />
+      <DateText>{"Data do agendamento"}</DateText>
+      <Input value={formattedDate} editable={false} placeholder="DD/MM/AAAA" />
 
       <Space value={32} />
 
@@ -101,8 +105,8 @@ export const Scheduling = () => {
       <CustomButton
         title={loading ? "Agendando..." : "Agendar transferência"}
         onPress={handleSchedule}
-        backgroundColor="#28a745"
-        borderColor="#218838"
+        backgroundColor="#3128a7"
+        borderColor="#3128a7"
         borderRadius={12}
         textColor="#fff"
         disabled={loading}

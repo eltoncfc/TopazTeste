@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ScreenContainer } from "../../components/ScreemComponent";
 import { CustomButton } from "../../components/CustomButton";
-import { Space, Title } from "./styles";
+import { Space } from "./styles";
 import { logout } from "../../utils/storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -9,7 +9,7 @@ import { RootStackParamList } from "../routes";
 import { Transfer } from "./Components/Transfer";
 import { transferAmount, getTransferList } from "./service";
 import { useAppSelector } from "../../store/store";
-import { TransferList } from "../TransferList";
+import { Alert } from "react-native";
 
 export const TransferScreen = () => {
   const navigation =
@@ -24,11 +24,10 @@ export const TransferScreen = () => {
 
   const handleTransfer = async () => {
     if (!token) {
-      setError("Você precisa estar logado para transferir.");
+      Alert.alert("Erro", "Você precisa estar logado para transferir.");
       return;
     }
 
-    setError(null);
     setLoading(true);
     const payload = {
       value: parseFloat(amount),
@@ -36,12 +35,12 @@ export const TransferScreen = () => {
       payeerDocument: recipient.replace(/\D/g, ""),
       transferDate: new Date().toISOString().split("T")[0],
     };
+
     try {
       const response = await transferAmount(payload, token);
       goToSuccess();
     } catch (error) {
-      console.error("Erro ao transferir:", error);
-      setError("Erro ao realizar transferência. Tente novamente.");
+      Alert.alert("Erro ao realizar transferência. Tente novamente.");
     } finally {
       setLoading(false);
     }

@@ -113,7 +113,7 @@ export const Home = () => {
         </BalanceSection>
         <Space value={68} />
         <CustomButton
-          title="Transferência"
+          title="Efetuar transferência"
           onPress={() => goToTransfer()}
           backgroundColor="#28a745"
           borderColor="#218838"
@@ -122,7 +122,7 @@ export const Home = () => {
         />
         <Space value={48} />
         <CustomButton
-          title="Agendar "
+          title="Agendar transferência"
           onPress={() => goToSchedule()}
           backgroundColor="#28a745"
           borderColor="#218838"
