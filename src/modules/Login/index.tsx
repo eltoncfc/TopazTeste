@@ -65,8 +65,6 @@ export default function Login() {
         />
       </FormWrapper>
 
-      <Space value={48} />
-
       <CustomButton
         testID="login-button"
         title="Entrar"
