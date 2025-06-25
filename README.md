@@ -67,16 +67,6 @@ Aplicativo bancário desenvolvido com React Native e Expo. Permite consulta de s
 
 ---
 
-⚠️ **Dica:**  
-É recomendado rodar os comandos separadamente para facilitar a identificação de possíveis erros, mas você também pode executar em sequência:
-
-```bash
-npm install --legacy-peer-deps 
-npm start
-```
-
----
-
 ## Como Rodar os Testes 🧪
 
 Os testes são feitos com Jest e React Testing Library.
