@@ -21,10 +21,10 @@ export const Transfer = ({
     <>
       <Title>{title}</Title>
 
-      <Label>CPF</Label>
+      <Label></Label>
       <Input
         value={recipient}
-        onChangeText={(text) => onChangeRecipient(formatCPF(text))}
+        onChangeText={(text: string) => onChangeRecipient(formatCPF(text))}
         placeholder="CPF"
         keyboardType="numeric"
       />
