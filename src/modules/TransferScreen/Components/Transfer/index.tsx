@@ -1,5 +1,6 @@
 import React from "react";
 import { Title, Label, Input, Space } from "./styles";
+import { formatCPF } from "../../../../utils/format";
 
 type Props = {
   amount: string;
@@ -16,14 +17,6 @@ export const Transfer = ({
   onChangeRecipient,
   title,
 }: Props) => {
-  const formatCPF = (value: string) => {
-    const numeric = value.replace(/\D/g, "").slice(0, 11);
-    return numeric
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-  };
-
   return (
     <>
       <Title>{title}</Title>

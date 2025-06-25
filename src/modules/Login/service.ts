@@ -23,12 +23,6 @@ export const login = async (
       body: JSON.stringify({ email, password }),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Erro na resposta:", errorText);
-      throw new Error("Credenciais errada?");
-    }
-
     const data = await response.json();
     return data;
   } catch (error) {

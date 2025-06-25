@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 export const Wrapper = styled.View`
-  padding-top: 24px; /* Distância entre topo do celular e o logo */
+  padding-top: 24px;
 `;
 
 export const HeaderContainer = styled.View`
@@ -16,6 +16,7 @@ export const HeaderContainer = styled.View`
 export const GoBackButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
+  margin-top: 26px;
 `;
 
 export const Placeholder = styled.View`

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -7,7 +8,7 @@ import Input from "../../components/CustomInput";
 import { CustomButton } from "../../components/CustomButton";
 import { ScreenContainer } from "../../components/ScreemComponent";
 
-import { useAppDispatch } from "../../store/store"; // hook do dispatch tipado
+import { useAppDispatch } from "../../store/store";
 import { setToken, setUserName } from "../../store/modules/auth/authSlice";
 
 import { RootStackParamList } from "../routes";
@@ -30,14 +31,12 @@ export default function Login() {
     try {
       const res = await login(email, password);
 
-      console.log("Login ok:", res);
-
       dispatch(setToken(res.token));
       dispatch(setUserName(res.user.name));
 
       goToHome();
     } catch (err: any) {
-      console.warn("Falha no login:", err.message);
+      Alert.alert("Erro ao entrar", "E-mail ou senha incorretos.");
     }
   };
 
@@ -46,7 +45,7 @@ export default function Login() {
       <Title>Login</Title>
 
       <FormWrapper>
-        <Space value={48} />
+        <Space value={88} />
 
         <Input
           placeholder="E-mail"
@@ -64,8 +63,10 @@ export default function Login() {
         />
       </FormWrapper>
 
+      <Space value={48} />
+
       <CustomButton
-        title="Enviar"
+        title="Entrar"
         onPress={handleLogin}
         backgroundColor="#28a745"
         borderColor="#218838"

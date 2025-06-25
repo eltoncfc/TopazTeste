@@ -55,7 +55,6 @@ export const getTransferList = async (
       },
     });
 
-    console.log("📄 Lista de transferências recebida:", response.data);
     return response.data;
   } catch (error: any) {
     console.error(

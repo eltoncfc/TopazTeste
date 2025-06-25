@@ -9,6 +9,7 @@ import { RootStackParamList } from "../routes";
 import { Transfer } from "./Components/Transfer";
 import { transferAmount, getTransferList } from "./service";
 import { useAppSelector } from "../../store/store";
+import { Alert } from "react-native";
 
 export const TransferScreen = () => {
   const navigation =
@@ -23,11 +24,10 @@ export const TransferScreen = () => {
 
   const handleTransfer = async () => {
     if (!token) {
-      setError("Você precisa estar logado para transferir.");
+      Alert.alert("Erro", "Você precisa estar logado para transferir.");
       return;
     }
 
-    setError(null);
     setLoading(true);
     const payload = {
       value: parseFloat(amount),
@@ -35,28 +35,19 @@ export const TransferScreen = () => {
       payeerDocument: recipient.replace(/\D/g, ""),
       transferDate: new Date().toISOString().split("T")[0],
     };
+
     try {
       const response = await transferAmount(payload, token);
       goToSuccess();
     } catch (error) {
-      console.error("Erro ao transferir:", error);
-      setError("Erro ao realizar transferência. Tente novamente.");
+      Alert.alert("Erro ao realizar transferência. Tente novamente.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleListTransfers = async () => {
-    if (!token) {
-      console.log("Token ausente. Não é possível buscar transferências.");
-      return;
-    }
-
-    try {
-      const transfers = await getTransferList(token);
-    } catch (err: any) {
-      console.error("Erro ao buscar transferências", err.message);
-    }
+  const gotToTransferList = () => {
+    navigation.navigate("TransferList");
   };
 
   const goToSuccess = () => {
@@ -67,7 +58,7 @@ export const TransferScreen = () => {
     <ScreenContainer showGoBack>
       <Space value={28} />
       <Transfer
-        title={"oq??"}
+        title={"Transferência"}
         amount={amount}
         recipient={recipient}
         onChangeAmount={setAmount}
@@ -76,7 +67,7 @@ export const TransferScreen = () => {
       <Space value={38} />
 
       <CustomButton
-        title="Efetuar transferência"
+        title="Efetuar Transferência"
         onPress={handleTransfer}
         backgroundColor="#28a745"
         borderColor="#218838"
@@ -87,8 +78,8 @@ export const TransferScreen = () => {
 
       <Space value={18} />
       <CustomButton
-        title="Listar Transferências"
-        onPress={handleListTransfers}
+        title="Listar transferências"
+        onPress={() => gotToTransferList()}
         backgroundColor="#007bff"
         borderColor="#0056b3"
         borderRadius={12}

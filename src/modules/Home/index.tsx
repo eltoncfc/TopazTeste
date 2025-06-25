@@ -23,6 +23,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../routes";
 import { useAppSelector } from "../../store/store";
 import { getBalance } from "./service";
+import { logout } from "../../utils/storage";
 
 export const Home = () => {
   const [balance, setBalance] = useState("R$ 3.520,45");
@@ -51,9 +52,9 @@ export const Home = () => {
 
     if (token) {
       try {
-        console.log("🔐 Token encontrado:", token);
+        console.log(" Token encontrado:", token);
         const response = await getBalance(token);
-        console.log("💰 Resposta da API de saldo:", response);
+        console.log(" Resposta da API de saldo:", response);
 
         const formattedBalance = `R$ ${response.accountBalance
           .toFixed(2)
@@ -67,7 +68,7 @@ export const Home = () => {
         );
       }
     } else {
-      console.warn("⚠️ Token não encontrado.");
+      console.warn(" Token não encontrado.");
     }
   };
 
@@ -112,7 +113,7 @@ export const Home = () => {
         </BalanceSection>
         <Space value={68} />
         <CustomButton
-          title="Transferência"
+          title="Efetuar transferência"
           onPress={() => goToTransfer()}
           backgroundColor="#28a745"
           borderColor="#218838"
@@ -121,7 +122,7 @@ export const Home = () => {
         />
         <Space value={48} />
         <CustomButton
-          title="Agendar "
+          title="Agendar transferência"
           onPress={() => goToSchedule()}
           backgroundColor="#28a745"
           borderColor="#218838"
@@ -140,7 +141,7 @@ export const Home = () => {
         <Space value={48} />
         <CustomButton
           title="Sair"
-          onPress={() => []}
+          onPress={() => logout(navigation)}
           backgroundColor="#28a745"
           borderColor="#218838"
           borderRadius={12}
