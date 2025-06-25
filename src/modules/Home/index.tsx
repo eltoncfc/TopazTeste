@@ -1,5 +1,3 @@
-//
-
 import React, { useEffect, useState } from "react";
 import { ScreenContainer } from "../../components/ScreemComponent";
 import {
