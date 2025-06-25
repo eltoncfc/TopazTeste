@@ -8,8 +8,8 @@ import {
   BalanceLabel,
   BalanceValue,
   EyeButton,
-  HeaderRow,
   Space,
+  HeaderColumn,
 } from "./styles";
 
 import { format } from "date-fns";
@@ -21,15 +21,20 @@ import { CustomButton } from "../../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../routes";
+import { useAppSelector } from "../../store/store";
+import { getBalance } from "./service";
 
 export const Home = () => {
-  const [userName, setUserName] = useState("Usuário");
   const [balance, setBalance] = useState("R$ 3.520,45");
   const [showBalance, setShowBalance] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const userName = useAppSelector((state) => state.auth.userName);
+
+  const token = useAppSelector((state) => state.auth.token);
 
   const goToSchedule = () => {
     navigation.navigate("Scheduling");
@@ -41,27 +46,59 @@ export const Home = () => {
     navigation.navigate("TransferList");
   };
 
-  useEffect(() => {
-    setUserName("Gabrieeel");
-    setBalance("R$ 3.520,45");
+  const fetchUserInfo = async () => {
+    console.log(" Iniciando busca de dados do usuário e saldo...");
 
+    if (token) {
+      try {
+        console.log("🔐 Token encontrado:", token);
+        const response = await getBalance(token);
+        console.log("💰 Resposta da API de saldo:", response);
+
+        const formattedBalance = `R$ ${response.accountBalance
+          .toFixed(2)
+          .replace(".", ",")}`;
+
+        setBalance(formattedBalance);
+      } catch (err: any) {
+        console.error(
+          " Erro ao buscar saldo:",
+          err?.response?.data || err.message
+        );
+      }
+    } else {
+      console.warn("⚠️ Token não encontrado.");
+    }
+  };
+
+  useEffect(() => {
     const now = new Date();
     const formatted = format(now, "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
     setCurrentDate(formatted);
+
+    fetchUserInfo();
   }, []);
 
   return (
     <ScreenContainer>
       <ContentContainer>
-        <HeaderRow>
-          <GreetingText>Olá, {userName}</GreetingText>
+        <HeaderColumn>
           <DateText>{currentDate}</DateText>
-        </HeaderRow>
-        <Space value={48} />
+          <Space value={28} />
 
+          <GreetingText>
+            {"Olá"}, {userName}
+          </GreetingText>
+        </HeaderColumn>
+        <Space value={48} />
         <BalanceSection>
           <BalanceLabel>Saldo:</BalanceLabel>
-          <BalanceValue>{showBalance ? balance : "••••••"}</BalanceValue>
+          <BalanceValue
+            onPress={() => setShowBalance((prev) => !prev)}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            {showBalance ? balance : "••••••"}
+          </BalanceValue>
           <EyeButton
             onPress={() => setShowBalance((prev) => !prev)}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
@@ -83,7 +120,6 @@ export const Home = () => {
           textColor="#fff"
         />
         <Space value={48} />
-
         <CustomButton
           title="Agendar "
           onPress={() => goToSchedule()}
@@ -92,9 +128,7 @@ export const Home = () => {
           borderRadius={12}
           textColor="#fff"
         />
-
         <Space value={48} />
-
         <CustomButton
           title="Lista de transferência"
           onPress={() => goToListTransfer()}
@@ -103,9 +137,7 @@ export const Home = () => {
           borderRadius={12}
           textColor="#fff"
         />
-
         <Space value={48} />
-
         <CustomButton
           title="Sair"
           onPress={() => []}

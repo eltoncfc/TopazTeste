@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScreenContainer } from "../../components/ScreemComponent";
 import { CustomButton } from "../../components/CustomButton";
-import { Space, Title } from "./styles";
+import { Space } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../routes";
@@ -29,7 +29,6 @@ export const TransferList = () => {
 
   const fetchTransfers = async (token: string) => {
     try {
-      console.log("Token usado na requisição:", token);
       const response = await getTransfers(token);
       setData(response.transfers);
     } catch (err) {

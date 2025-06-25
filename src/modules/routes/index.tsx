@@ -2,7 +2,6 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Login from "../Login";
-import { Balance } from "../BalanceScreen";
 import { LogoHeader } from "../../components/LogoHeader";
 import { Home } from "../Home";
 import { UserSuccess } from "../UserSuccess";
@@ -54,13 +53,6 @@ export const MainNavigation = ({ screen, params }: PropsMain) => {
       <Stack.Screen
         name="TransferScreen"
         component={TransferScreen}
-        options={{
-          header: () => <LogoHeader showGoBack />,
-        }}
-      />
-      <Stack.Screen
-        name="BalanceScreen"
-        component={Balance}
         options={{
           header: () => <LogoHeader showGoBack />,
         }}
