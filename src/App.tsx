@@ -13,7 +13,6 @@ const AppInitializer = () => {
   useEffect(() => {
     const fakeToken = "fake-jwt-token";
     dispatch(setToken(fakeToken));
-    console.log(" Token de teste setado no Redux???", fakeToken);
   }, []);
 
   return <MainNavigation screen="Login" />;
