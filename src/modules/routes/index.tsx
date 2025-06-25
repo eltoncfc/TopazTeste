@@ -8,6 +8,7 @@ import { Home } from "../Home";
 import { UserSuccess } from "../UserSuccess";
 import { TransferScreen } from "../TransferScreen";
 import { Scheduling } from "../Scheduling";
+import { TransferList } from "../TransferList";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -16,6 +17,7 @@ export type RootStackParamList = {
   Home: undefined;
   UserSuccess: undefined;
   Scheduling: undefined;
+  TransferList: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -77,6 +79,14 @@ export const MainNavigation = ({ screen, params }: PropsMain) => {
         component={Scheduling}
         options={{
           header: () => <LogoHeader />,
+        }}
+      />
+
+      <Stack.Screen
+        name="TransferList"
+        component={TransferList}
+        options={{
+          header: () => <LogoHeader showGoBack />,
         }}
       />
     </Stack.Navigator>

@@ -1,17 +1,23 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { Title, FormWrapper, Space } from "./styles";
 import Input from "../../components/CustomInput";
 import { CustomButton } from "../../components/CustomButton";
-import { RootStackParamList } from "../routes";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ScreenContainer } from "../../components/ScreemComponent";
+
+import { useAppDispatch } from "../../store/store"; // hook do dispatch tipado
+import { setToken, setUserName } from "../../store/modules/auth/authSlice";
+
+import { RootStackParamList } from "../routes";
 import { login } from "./service";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useAppDispatch();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -25,6 +31,9 @@ export default function Login() {
       const res = await login(email, password);
 
       console.log("Login ok:", res);
+
+      dispatch(setToken(res.token));
+      dispatch(setUserName(res.user.name));
 
       goToHome();
     } catch (err: any) {
@@ -57,7 +66,7 @@ export default function Login() {
 
       <CustomButton
         title="Enviar"
-        onPress={() => handleLogin()}
+        onPress={handleLogin}
         backgroundColor="#28a745"
         borderColor="#218838"
         borderRadius={12}
