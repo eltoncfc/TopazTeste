@@ -1,8 +1,21 @@
 # Topazapp
 
---- Observação inicial ---
-Teste realizados nos modulos Home e Login. Ambos estão com Warn.
-Peço desculpas por isso. 
+### 📝 Observação Inicial
+
+Testes foram realizados nos módulos **Home** e **Login**. Ambos estão passando, mas apresentam alguns **warnings**.  
+Peço desculpas por isso e agradeço pela compreensão.
+
+🔧 Melhorias que gostaria de ter feito:
+
+Criar um componente de Modal para exibição de erros e alertas.
+
+Implementar um Design System básico para padronizar cores, fontes e espaçamentos.
+
+Adicionar tratamento de erros centralizado com feedback visual para o usuário, ao invés de "alerts"
+
+Criar um sistema de tema Dark mode (claro/escuro).
+
+Adicionar mais testes unitários e de integração, cobrindo cenários de falha.
 
 ---
 
