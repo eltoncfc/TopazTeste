@@ -38,7 +38,7 @@ export const Home = () => {
     navigation.navigate("TransferScreen");
   };
   const goToListTransfer = () => {
-    navigation.navigate("Home");
+    navigation.navigate("TransferList");
   };
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export const Home = () => {
 
         <CustomButton
           title="Lista de transferência"
-          onPress={() => []}
+          onPress={() => goToListTransfer()}
           backgroundColor="#28a745"
           borderColor="#218838"
           borderRadius={12}
