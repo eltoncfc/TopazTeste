@@ -49,7 +49,8 @@ Aplicativo bancário desenvolvido com React Native e Expo. Permite consulta de s
 É recomendado rodar os comandos separadamente para facilitar a identificação de possíveis erros, mas você também pode executar em sequência:
 
 ```bash
-npm install --legacy-peer-deps && npm start
+npm install --legacy-peer-deps 
+npm start
 ```
 
 ---
@@ -64,21 +65,6 @@ Para executar os testes:
 npm test
 ```
 
----
 
-## Observações e Limitações ⚠️
 
-- As APIs utilizadas são simuladas para ambiente de teste.
-- O token JWT é fictício e estático para facilitar o desenvolvimento.
-- Pode ser necessário usar `npm install --legacy-peer-deps` devido a conflitos de dependência entre as versões das bibliotecas.
-- Recomendamos usar Node.js na versão LTS para evitar incompatibilidades.
 
----
-
-## Screenshots 📸
-
-_Serão adicionadas posteriormente._
-
----
-
-Se precisar de ajuda ou quiser mais detalhes, estou à disposição!
