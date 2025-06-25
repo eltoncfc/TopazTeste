@@ -1,3 +1,5 @@
+//
+
 import React, { useEffect, useState } from "react";
 import { ScreenContainer } from "../../components/ScreemComponent";
 import {
@@ -84,23 +86,28 @@ export const Home = () => {
     <ScreenContainer>
       <ContentContainer>
         <HeaderColumn>
-          <DateText>{currentDate}</DateText>
+          <DateText testID="date-text">{currentDate}</DateText>
           <Space value={28} />
 
-          <GreetingText>
-            {"Olá"}, {userName}
+          <GreetingText testID="greeting-text">
+            {"Olá"}
+            <GreetingText testID="username-text" style={{ fontWeight: "bold" }}>
+              {userName}
+            </GreetingText>
           </GreetingText>
         </HeaderColumn>
         <Space value={48} />
         <BalanceSection>
           <BalanceLabel>Saldo:</BalanceLabel>
           <BalanceValue
+            testID="balance-value"
             onPress={() => setShowBalance((prev) => !prev)}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             {showBalance ? balance : "••••••"}
           </BalanceValue>
           <EyeButton
+            testID="toggle-balance-visibility"
             onPress={() => setShowBalance((prev) => !prev)}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
@@ -113,6 +120,7 @@ export const Home = () => {
         </BalanceSection>
         <Space value={68} />
         <CustomButton
+          testID="btn-transfer"
           title="Efetuar transferência"
           onPress={() => goToTransfer()}
           backgroundColor="#28a745"
@@ -122,6 +130,7 @@ export const Home = () => {
         />
         <Space value={48} />
         <CustomButton
+          testID="btn-schedule"
           title="Agendar transferência"
           onPress={() => goToSchedule()}
           backgroundColor="#28a745"
@@ -131,6 +140,7 @@ export const Home = () => {
         />
         <Space value={48} />
         <CustomButton
+          testID="btn-transfer-list"
           title="Lista de transferência"
           onPress={() => goToListTransfer()}
           backgroundColor="#28a745"
@@ -140,6 +150,7 @@ export const Home = () => {
         />
         <Space value={48} />
         <CustomButton
+          testID="btn-logout"
           title="Sair"
           onPress={() => logout(navigation)}
           backgroundColor="#28a745"

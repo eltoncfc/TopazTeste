@@ -26,12 +26,12 @@ describe("Login screen", () => {
       user: { id: 1, name: "Teste", email: "teste@exemplo.com" },
     });
 
-    const { getByPlaceholderText, getByText } = render(<Login />);
+    const { getByTestId } = render(<Login />);
 
-    fireEvent.changeText(getByPlaceholderText("E-mail"), "user@teste.com");
-    fireEvent.changeText(getByPlaceholderText("Senha"), "123456");
+    fireEvent.changeText(getByTestId("email-input"), "user@teste.com");
+    fireEvent.changeText(getByTestId("password-input"), "123456");
 
-    fireEvent.press(getByText("Entrar"));
+    fireEvent.press(getByTestId("login-button"));
 
     await waitFor(() => {
       expect(loginMock).toHaveBeenCalledWith("user@teste.com", "123456");

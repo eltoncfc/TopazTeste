@@ -48,6 +48,7 @@ export default function Login() {
         <Space value={88} />
 
         <Input
+          testID="email-input"
           placeholder="E-mail"
           keyboardType="email-address"
           autoCapitalize="none"
@@ -56,6 +57,7 @@ export default function Login() {
         />
 
         <Input
+          testID="password-input"
           placeholder="Senha"
           secureTextEntry
           value={password}
@@ -66,6 +68,7 @@ export default function Login() {
       <Space value={48} />
 
       <CustomButton
+        testID="login-button"
         title="Entrar"
         onPress={handleLogin}
         backgroundColor="#28a745"
