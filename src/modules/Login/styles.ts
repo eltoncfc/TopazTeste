@@ -35,13 +35,16 @@ export const Content = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  color: #333;
+  margin-top: 16px;
   margin-bottom: 24px;
+  text-align: center;
+  color: #333;
 `;
 
 export const FormWrapper = styled.View`
+  flex: 1;
   width: 100%;
   background-color: white;
 `;

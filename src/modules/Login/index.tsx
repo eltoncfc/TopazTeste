@@ -7,7 +7,7 @@ import Input from "../../components/CustomInput";
 import { CustomButton } from "../../components/CustomButton";
 import { ScreenContainer } from "../../components/ScreemComponent";
 
-import { useAppDispatch } from "../../store/store"; // hook do dispatch tipado
+import { useAppDispatch } from "../../store/store";
 import { setToken, setUserName } from "../../store/modules/auth/authSlice";
 
 import { RootStackParamList } from "../routes";
@@ -46,7 +46,7 @@ export default function Login() {
       <Title>Login</Title>
 
       <FormWrapper>
-        <Space value={48} />
+        <Space value={88} />
 
         <Input
           placeholder="E-mail"
@@ -63,9 +63,10 @@ export default function Login() {
           onChangeText={setPassword}
         />
       </FormWrapper>
+      <Space value={48} />
 
       <CustomButton
-        title="Enviar"
+        title="Entrar"
         onPress={handleLogin}
         backgroundColor="#28a745"
         borderColor="#218838"

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ScreenContainer } from "../../components/ScreemComponent";
 import { CustomButton } from "../../components/CustomButton";
-import { Space } from "./styles";
+import { Space, Title } from "./styles";
 import { logout } from "../../utils/storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -9,6 +9,7 @@ import { RootStackParamList } from "../routes";
 import { Transfer } from "./Components/Transfer";
 import { transferAmount, getTransferList } from "./service";
 import { useAppSelector } from "../../store/store";
+import { TransferList } from "../TransferList";
 
 export const TransferScreen = () => {
   const navigation =
@@ -46,17 +47,8 @@ export const TransferScreen = () => {
     }
   };
 
-  const handleListTransfers = async () => {
-    if (!token) {
-      console.log("Token ausente. Não é possível buscar transferências.");
-      return;
-    }
-
-    try {
-      const transfers = await getTransferList(token);
-    } catch (err: any) {
-      console.error("Erro ao buscar transferências", err.message);
-    }
+  const gotToTransferList = () => {
+    navigation.navigate("TransferList");
   };
 
   const goToSuccess = () => {
@@ -67,7 +59,7 @@ export const TransferScreen = () => {
     <ScreenContainer showGoBack>
       <Space value={28} />
       <Transfer
-        title={"oq??"}
+        title={"Transferência"}
         amount={amount}
         recipient={recipient}
         onChangeAmount={setAmount}
@@ -76,7 +68,7 @@ export const TransferScreen = () => {
       <Space value={38} />
 
       <CustomButton
-        title="Efetuar transferência"
+        title="Efetuar Transferência"
         onPress={handleTransfer}
         backgroundColor="#28a745"
         borderColor="#218838"
@@ -87,8 +79,8 @@ export const TransferScreen = () => {
 
       <Space value={18} />
       <CustomButton
-        title="Listar Transferências"
-        onPress={handleListTransfers}
+        title="Listar transferências"
+        onPress={() => gotToTransferList()}
         backgroundColor="#007bff"
         borderColor="#0056b3"
         borderRadius={12}
